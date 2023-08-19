@@ -1,0 +1,99 @@
+#pragma kernel CSMain
+
+#include "ClassicNoise2D.hlsl"
+#include "SimplexNoise2D.hlsl"
+#include "Maffs.hlsl"
+
+RWTexture2D<float4> Result;
+float Resolution;
+
+float2 Seed;
+
+int Octaves;
+float Frequency;
+float Amplitude;
+float Lacunarity;
+float Gain;
+
+float WarpStrength;
+float2 Offset;
+
+int NoiseID;
+int EffectID;
+
+float NoiseProcessing(float value)
+{   
+    switch(EffectID)
+    {
+        case 0:
+            return (value + 1) / 2;
+        case 1:
+            return abs(value);
+        case 2:
+            return 1 - abs(value);
+        case 3:
+            return value;
+        case 4:
+            return map(-1, 1, 0, 1, value);
+        case 5:
+            return remap(-1, 1, 0, 1, value);
+        default:
+            return (value + 1) / 2;
+    }
+}
+
+float GetNoiseLayer(float2 p)
+{
+    switch (NoiseID)
+    {
+        case 0:
+            return ClassicNoise(p);
+        case 1:
+            return abs(ClassicNoise(p));
+        case 2:
+            return (1 - abs(ClassicNoise(p)));
+        case 3:
+            return SimplexNoise(p);
+        case 4:
+            return abs(SimplexNoise(p));
+        case 5:
+            return (1 - abs(SimplexNoise(p)));
+        default:
+            return ClassicNoise(p);
+    }
+}
+
+float FractalBrownianMotion(float2 p, int octaves, float freq, float amp, float lacunarity, float gain)
+{
+    float sum = 0;
+    for(int i = 0; i < octaves; i++)
+    {
+        float n = GetNoiseLayer(p * freq + Offset); //  + Offset
+        sum += n*amp;
+        freq *= lacunarity;
+        amp *= gain;
+    }
+
+    return sum;
+}
+
+float DomainWarp(float x, float y)
+{
+    float xOffset = FractalBrownianMotion(float2(x + 0, y + 0), Octaves, Frequency, Amplitude, Lacunarity, Gain); // Another Offset?
+    float yOffset = FractalBrownianMotion(float2(x + 5.2, y + 2.4), Octaves, Frequency, Amplitude, Lacunarity, Gain); // Another Offset?
+
+    return FractalBrownianMotion(float2(x + WarpStrength * xOffset, y + WarpStrength * yOffset), Octaves, Frequency, Amplitude, Lacunarity, Gain); // Offset does kinda cool stuff here
+}
+
+[numthreads(8,8,1)]
+void CSMain (uint3 id : SV_DispatchThreadID)
+{
+    float x = id.x / Resolution;
+    float y = id.y / Resolution;
+
+    // float noise = FractalBrownianMotion(float2(x, y), Octaves, Frequency, Amplitude, Lacunarity, Gain);
+    float noise = DomainWarp(x, y);
+    float value = NoiseProcessing(noise);
+
+    Result[id.xy] = float4(value, value, value, 1);
+}
