@@ -1,6 +1,4 @@
-# sandbox
-[![Watch the video](https://img.youtube.com/vi/Xvri9_hhfrI/maxresdefault.jpg)](https://youtu.be/Xvri9_hhfrI)
-
+https://github.com/OO0oo0oOOooo/sandbox/assets/97352407/1b284edc-afad-4b4a-b659-6c7ac8fbf14e
 
 # Try it
 https://jahko.itch.io/super-secret-sandbox-test
