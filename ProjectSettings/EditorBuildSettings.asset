@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/New Scene.unity
-    guid: 72f7970cbafdcf24aa9da3b3812fb9bb
+    path: Assets/Scenes/MarchingCubes.unity
+    guid: 5710506952d67b94bbc097c4b68eba32
   m_configObjects: {}
