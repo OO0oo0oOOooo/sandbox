@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa126859a8aed3a4683055b56f5fcdf6, type: 3}
   m_Name: Noise Settings
   m_EditorClassIdentifier: 
-  Octaves: 1
-  Frequency: 250
+  Octaves: 3
+  Frequency: 200
   Amplitude: 1
   Lacunarity: 2
   Gain: 0.5
-  WarpStrength: 500
+  WarpStrength: 1000
   RedistributionModifier: 1.2
-  Exponent: 2
+  Exponent: 5
