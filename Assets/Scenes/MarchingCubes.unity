@@ -3120,8 +3120,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ade93ca8b8608648abb64dbba9308b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 4701406770634164141}
-  mode: 3
 --- !u!114 &7683587111613583774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3134,7 +3132,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85f0ffd48ab0f11448b57ea017e150d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: af2ef1d97dc4567438b6dc86492a1f54, type: 2}
 --- !u!1 &7826297897676743640
 GameObject:
   m_ObjectHideFlags: 0

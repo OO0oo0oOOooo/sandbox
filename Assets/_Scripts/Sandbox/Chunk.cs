@@ -41,7 +41,8 @@ public class Chunk
         _mesh = new Mesh();
         _mesh.hideFlags = HideFlags.HideAndDontSave;
 
-        _meshRenderer.material = Resources.Load<Material>("Materials/Toon Terrain");
+        // _meshRenderer.material = Resources.Load<Material>("Materials/Toon Terrain");
+        _meshRenderer.material = Resources.Load<Material>("Materials/Terrain");
         _meshRenderer.material.SetTexture("_TexArray", _world.TerrainTexArray);
 
         // TerrainMap = new TerrainPoint[_width + 1, _height + 1, _width + 1];
