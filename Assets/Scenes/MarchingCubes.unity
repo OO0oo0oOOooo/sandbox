@@ -1504,7 +1504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65237f92b007e734c9fef1b602567759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxWorldSizeInChunks: 5
+  MaxWorldSizeInChunks: 10
   MaxWorldHeightInChunks: 10
   settings: {fileID: 11400000, guid: 3212dfdb664253f4da7f50b2d84eb0b5, type: 2}
   TerrainTextures:
