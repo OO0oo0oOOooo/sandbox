@@ -5,9 +5,11 @@ public class SimpleCollider : MonoBehaviour
     private Transform _transform;
     public LayerMask LayerMask;
 
+    [SerializeField] private float _slopeLimit = 45f;
+
     public bool OnGround;
-    public Vector3 AdverageNormal;
-    public Vector3 AdveragePoint;
+    public Vector3 AverageNormal;
+    public Vector3 AveragePoint;
     public float AdverageDistance;
 
     [SerializeField] private Vector3 _raycastStartOffset = Vector3.up * -0.1f;
@@ -25,6 +27,9 @@ public class SimpleCollider : MonoBehaviour
     private void Update()
     {
         GetNormal();
+
+        if(Vector3.Angle(AverageNormal, Vector3.up) > _slopeLimit)
+            OnGround = false;
     }
 
     private void GetNormal()
@@ -78,14 +83,14 @@ public class SimpleCollider : MonoBehaviour
         {
             // Debug.Log("No Ground");
             OnGround = false;
-            AdverageNormal = transform.up;
-            AdveragePoint = Vector3.zero;
+            AverageNormal = transform.up;
+            AveragePoint = Vector3.zero;
             AdverageDistance = 1.2f;
             return;
         }
 
-        AdverageNormal = advNormal.normalized;
-        AdveragePoint = advPoint / hitCount;
+        AverageNormal = advNormal.normalized;
+        AveragePoint = advPoint / hitCount;
         AdverageDistance = advDistance / hitCount;
     }
 }

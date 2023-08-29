@@ -42,7 +42,7 @@ public partial class Movement : MonoBehaviour
         if(_collision.OnGround)
         {
             // Rotate movement vector to match ground tangent
-            _inputDir = Vector3.Cross(Vector3.Cross(_collision.AdverageNormal, _inputDir), _collision.AdverageNormal);
+            _inputDir = Vector3.Cross(Vector3.Cross(_collision.AverageNormal, _inputDir), _collision.AverageNormal);
 
             GroundAccelerate();
             ApplyFriction(_friction);
